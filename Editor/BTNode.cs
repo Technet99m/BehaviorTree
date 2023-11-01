@@ -27,8 +27,8 @@ namespace BTEditor
             GUID = System.Guid.NewGuid().ToString();
             var contextMenuManipulator =  new ContextualMenuManipulator(evt =>
             {
-                evt.menu.AppendAction("Delete", (e) => Delete(), (e => isUnique ? DropdownMenuAction.Status.Normal : DropdownMenuAction.Status.Disabled));
-                evt.menu.AppendAction("Duplicate", (e) => Duplicate(), (e => isUnique ? DropdownMenuAction.Status.Normal : DropdownMenuAction.Status.Disabled));
+                evt.menu.AppendAction("Delete", (e) => Delete(), e => isUnique ? DropdownMenuAction.Status.Normal : DropdownMenuAction.Status.Disabled);
+                evt.menu.AppendAction("Duplicate", (e) => Duplicate(), e => isUnique ? DropdownMenuAction.Status.Normal : DropdownMenuAction.Status.Disabled);
             });
             this.AddManipulator(contextMenuManipulator);
             
@@ -37,7 +37,7 @@ namespace BTEditor
             GeneratePort("Input", Direction.Input);
         }
 
-        public void Update()
+        protected void Update()
         {
             RefreshExpandedState();
             RefreshPorts();
@@ -54,6 +54,7 @@ namespace BTEditor
             else
             {
                 outputContainer.Add(port);
+                port.AddManipulator(new EdgeConnector<Edge>(new BTEdgeConnectorListener(_graphView)));
             }
             return port;
         }
