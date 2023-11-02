@@ -88,17 +88,5 @@ namespace BTEditor
             AddElement(node);
             return node;
         }
-
-        private void Connect(Port output, Port input)
-        {
-            var edge = new Edge
-            {
-                output = output,
-                input = input
-            };
-            edge.output.Connect(edge);
-            edge.input.Connect(edge);
-            AddElement(edge);
-        }
     }
 }
