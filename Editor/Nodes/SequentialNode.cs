@@ -71,13 +71,8 @@ namespace BTEditor
             foreach (var connection in connections)
             {
                 var port = AddExtraOutputPort();
-                port.ConnectTo(connection.InputPort);
+                var edge = port.ConnectTo(connection.InputPort);
 
-                var edge = new Edge()
-                {
-                    output = port,
-                    input = connection.InputPort
-                };
                 _graphView.Add(edge);
             }
         }

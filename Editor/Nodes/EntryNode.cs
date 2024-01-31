@@ -28,13 +28,7 @@ namespace BTEditor
 
         public void ConnectTo(BTNode node)
         {
-            _entryPort.ConnectTo(node.InputPort);
-
-            var edge = new Edge
-            {
-                output = _entryPort,
-                input = node.InputPort
-            };
+            var edge = _entryPort.ConnectTo(node.InputPort);
             _graphView.Add(edge);
         }
     }
