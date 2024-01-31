@@ -4,6 +4,7 @@ using System.IO;
 using System;
 using UnityEngine;
 using LitJson;
+using UnityEditor;
 
 namespace BTEditor
 {
@@ -25,6 +26,7 @@ namespace BTEditor
 
             var json = JsonMapper.ToJson(jsonData);
             File.WriteAllText(filename, json);
+            AssetDatabase.Refresh();
         }
 
         public static EntryNode Import(BTGraphView graphView, string filename)
