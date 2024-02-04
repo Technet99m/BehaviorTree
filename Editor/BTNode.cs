@@ -108,5 +108,6 @@ namespace BTEditor
         Action,
         Negation,
         Sequential,
+        Condition,
     }
 }

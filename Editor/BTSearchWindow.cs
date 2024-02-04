@@ -47,6 +47,11 @@ namespace BTEditor
                     level = 1,
                     userData = new NegationNode(_graphView)
                 },
+                new SearchTreeEntry(new GUIContent("Condition"))
+                {
+                    level = 1,
+                    userData = new ConditionNode(_graphView)
+                }
             };
             return tree;
         }

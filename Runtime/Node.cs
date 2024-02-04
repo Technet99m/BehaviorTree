@@ -28,5 +28,6 @@ namespace BTRuntime
         Action,
         Negation,
         Sequential,
+        Condition
     }
 }

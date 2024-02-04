@@ -88,6 +88,9 @@ namespace BTRuntime
                 case NodeType.Sequential:
                     var children = nodeData["children"].DeserializeList(guid=> createdNodes[guid.ToString()]);
                     return new SequentialNode(context, children, nodeData["mode"].ToString() == "Any" ? SequentialNode.SequenceMode.Any: SequentialNode.SequenceMode.All, nodeData["runningIsSuccess"].AsBool);
+                case NodeType.Condition:
+                    var success = nodeData.ContainsKey("success") ? createdNodes[nodeData["success"].ToString()] : null;
+                    return new ConditionNode(context, actionLibrary[nodeData["condition"].ToString()], success);
             }
             return null;
         }

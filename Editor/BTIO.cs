@@ -56,6 +56,9 @@ namespace BTEditor
                     case BTNodeType.Negation:
                         node = new NegationNode(graphView);
                         break;
+                    case BTNodeType.Condition:
+                        node = new ConditionNode(graphView);
+                        break;
                 }
                 node.GUID = key;
                 graphView.CreateNode(node, data["position"].ToVector2());
@@ -88,6 +91,11 @@ namespace BTEditor
                         sequentialNode.SetMode(data["mode"].ToString(), data["runningIsSuccess"].ToBool());
                         var connections = data["children"].DeserializeList(guid => nodes[guid.ToString()]);
                         sequentialNode.FillConnections(connections);
+                        break;
+                    case BTNodeType.Condition:
+                        var conditionNode = node as ConditionNode;
+                        var success = data.ContainsKey("success") ? nodes[data["success"].ToString()] : null;
+                        conditionNode.SetOutput(success);
                         break;
                 }
             }
