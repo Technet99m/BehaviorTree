@@ -59,6 +59,10 @@ namespace BTEditor
                     case BTNodeType.Condition:
                         node = new ConditionNode(graphView);
                         break;
+                    case BTNodeType.ConvertRunning:
+                        node = new ConvertRunning(graphView);
+                        break;
+                    
                 }
                 node.GUID = key;
                 graphView.CreateNode(node, data["position"].ToVector2());
@@ -95,8 +99,14 @@ namespace BTEditor
                     case BTNodeType.Condition:
                         var conditionNode = node as ConditionNode;
                         var success = data.ContainsKey("success") ? nodes[data["success"].ToString()] : null;
-                        conditionNode.SetOutput(success);
+                        conditionNode.SetData(success, data["condition"].ToString());
                         break;
+                    case BTNodeType.ConvertRunning:
+                        var convertNode = node as ConvertRunning;
+                        var child = data.ContainsKey("child") ? nodes[data["child"].ToString()] : null;
+                        convertNode.SetData(child, data["toSuccess"].ToBool());
+                        break;
+
                 }
             }
 

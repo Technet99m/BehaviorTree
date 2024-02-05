@@ -56,7 +56,10 @@ namespace BTRuntime
                     return true;
                 case NodeType.Entry:
                 case NodeType.Negation:
+                case NodeType.ConvertRunning:
                     return createdNodes.ContainsKey(nodeData["child"].ToString());
+                case NodeType.Condition:
+                    return createdNodes.ContainsKey(nodeData["success"].ToString());
                 case NodeType.Sequential:
                     foreach (var child in nodeData["children"])
                     {
@@ -91,6 +94,9 @@ namespace BTRuntime
                 case NodeType.Condition:
                     var success = nodeData.ContainsKey("success") ? createdNodes[nodeData["success"].ToString()] : null;
                     return new ConditionNode(context, actionLibrary[nodeData["condition"].ToString()], success);
+                case NodeType.ConvertRunning:
+                    var convert = new ConvertRunning(context,nodeData["toSuccess"].ToBool(), createdNodes[nodeData["child"].ToString()]);
+                    return convert;
             }
             return null;
         }

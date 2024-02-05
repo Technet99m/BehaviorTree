@@ -51,6 +51,11 @@ namespace BTEditor
                 {
                     level = 1,
                     userData = new ConditionNode(_graphView)
+                },
+                new SearchTreeEntry(new GUIContent("Convert Running"))
+                {
+                    level = 1,
+                    userData = new ConvertRunning(_graphView)
                 }
             };
             return tree;

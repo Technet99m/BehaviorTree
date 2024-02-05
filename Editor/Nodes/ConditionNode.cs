@@ -13,7 +13,7 @@ namespace BTEditor
 
         private Port _successPort;
 
-        public ConditionNode(BTGraphView graphView) : base(graphView, "Conditional Node", BTNodeType.Sequential)
+        public ConditionNode(BTGraphView graphView) : base(graphView, "Conditional Node", BTNodeType.Condition)
         {
             _conditionNameField = new TextField();
             topContainer.style.backgroundColor = Color.yellow;
@@ -43,13 +43,14 @@ namespace BTEditor
         }
 
 
-        public void SetOutput(BTNode success)
+        public void SetData(BTNode success, string conditionName)
         {
             if (success != null)
             {
                 var edge = _successPort.ConnectTo(success.InputPort);
                 _graphView.Add(edge);
             }
+            _conditionNameField.value = conditionName;
         }
     }
 }

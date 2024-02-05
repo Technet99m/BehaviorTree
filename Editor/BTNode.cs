@@ -109,5 +109,6 @@ namespace BTEditor
         Negation,
         Sequential,
         Condition,
+        ConvertRunning
     }
 }
